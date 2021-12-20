@@ -39,27 +39,28 @@ class HarmonyApp:
       curr_index = self.get_index(curr_index)
     return scale_notes
 
+  def calculate_harmony_notes(self, input_json):
+    harmony_notes = None
+    interval_offset = self.intervals[input_json['interval']]
+    input_notes = input_json['notes']
+    scale_type = input_json['scale']
+    total_notes = len(input_notes)
+    first_note = input_notes[0]
+    harmony_notes = None
+    interval_start_index = self.get_interval_start(first_note, interval_offset)
+    harmony_notes = self.get_scale_notes(first_note, interval_start_index, total_notes)
+    return harmony_notes
+
+  def print_notes(self, input_notes, harmony_notes):
+    print(f"Riff Notes: {input_notes}")
+    print(f"Harmony Notes: {harmony_notes}")
+
   def main(self):
     with open("input.json", "r") as input:
       input_data = json.loads(input.read())
-
-    phrases = input_data['phrases']
-    for phrase in phrases:
-      interval_offset = self.intervals[phrase['interval']]
-      input_notes = phrase['notes']
-      scale_type = phrase['scale']
-      total_notes = len(input_notes)
-      first_note = input_notes[0]
-      harmony_notes = None
-      try:
-        interval_start_index = self.get_interval_start(first_note, interval_offset)
-        harmony_notes = self.get_scale_notes(first_note, interval_start_index, total_notes)
-      except Exception as e:
-        print(f"ERROR!! with input -> {input_notes}")
-        print(f"ERROR is: {e}")
-
-      print(f"Riff Notes: {input_notes}")
-      print(f"Harmony Notes: {harmony_notes}")
+    for phrase in input_data['phrases']:
+      harmony_notes = self.calculate_harmony_notes(phrase)
+      self.print_notes(phrase['notes'], harmony_notes)
 
 if __name__ == '__main__':
   HarmonyApp().main()
