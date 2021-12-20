@@ -1,13 +1,17 @@
 import json
+
+def get_index(curr_index):
+  if curr_index + 1 >= len(scale):
+    curr_index = 0
+  else:
+    curr_index += 1
+  return curr_index
+
 def get_interval_start(first_note, interval_offset):
   start_index = scale.index(first_note)
   curr_index = start_index
   for i in range(interval_offset):
-
-    if curr_index + 1 >= len(scale):
-      curr_index = 0
-    else:
-      curr_index += 1
+    curr_index = get_index(curr_index)
   return curr_index
 
 def get_scale_notes(first_note, interval_start_index, total_notes):
@@ -16,10 +20,7 @@ def get_scale_notes(first_note, interval_start_index, total_notes):
   curr_index = interval_start_index
   for i in range(total_notes):
     scale_notes.append(scale[curr_index])
-    if curr_index + 1 >= len(scale):
-      curr_index = 0
-    else:
-      curr_index += 1
+    curr_index = get_index(curr_index)
   return scale_notes
 
 scale = ["A", "B", "C#", "D", "E", "F#", "G#"]
