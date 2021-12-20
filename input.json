@@ -1,6 +1,22 @@
 {
-  "Scale": "Major",
-  "Key": "A",
-  "Interval": "Major Third",
-  "Notes": ["D", "E", "F#"]
+  "phrases": [
+    {
+      "scale": "Major",
+      "key": "A",
+      "interval": "Major Third",
+      "notes": ["D", "E", "F#"]
+    },
+    {
+      "scale": "Major",
+      "key": "A",
+      "interval": "Perfect Fifth",
+      "notes": ["B", "C#", "D"]
+    },
+    {
+      "scale": "Major",
+      "key": "A",
+      "interval": "Major Third",
+      "notes": ["C#", "D", "E"]
+    }
+  ]
 }

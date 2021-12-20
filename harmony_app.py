@@ -1,6 +1,4 @@
 import json
-with open("input.json", "r") as input:
-  input_data = json.loads(input.read())
 
 def get_scale_notes(start, total_notes):
   scale_notes = []
@@ -13,7 +11,6 @@ def get_scale_notes(start, total_notes):
     else:
       curr_index += 1
   return scale_notes
-
 
 scale = ["A", "B", "C#", "D", "E", "F#", "G#"]
 notes = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"]
@@ -33,13 +30,20 @@ intervals = {
   'Perfect Octave': 12
 }
 
-interval_offset = intervals[input_data['Interval']]
-input_notes = input_data['Notes']
-total_notes = len(input_notes)
+with open("input.json", "r") as input:
+  input_data = json.loads(input.read())
 
-first_note = input_notes[0]
-scale_note = notes[notes.index(first_note) + interval_offset]
-harmony_notes = get_scale_notes(scale_note, total_notes)
+phrases = input_data['phrases']
+for phrase in phrases:
+  try:
+    interval_offset = intervals[phrase['interval']]
+    input_notes = phrase['notes']
+    total_notes = len(input_notes)
+    first_note = input_notes[0]
+    scale_note = notes[notes.index(first_note) + interval_offset]
+    harmony_notes = get_scale_notes(scale_note, total_notes)
+  except Exception:
+    print(f"ERROR!! with input -> {input_notes}")
 
-print(f"Riff Notes: {input_notes}")
-print(f"Harmony Notes: {harmony_notes}")
+  print(f"Riff Notes: {input_notes}")
+  print(f"Harmony Notes: {harmony_notes}")
