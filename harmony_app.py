@@ -15,7 +15,7 @@ class HarmonyApp:
   }
 
   def __init__(self):
-    pass
+    print("In __init__")
 
   def get_index(self, curr_index):
     if curr_index + 1 >= len(self.scale):
